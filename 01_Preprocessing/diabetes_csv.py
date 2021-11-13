@@ -8,13 +8,28 @@ no servidor.
 
 @author: Aydano Machado <aydano.machado@gmail.com>
 """
-
+import seaborn as sns
+import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 import requests
 
 print('\n - Lendo o arquivo com o dataset sobre diabetes')
-data = pd.read_csv('diabetes_dataset.csv')
+data = pd.read_csv('https://raw.githubusercontent.com/audreyemmely/mlclass/master/01_Preprocessing/diabetes_dataset.csv')
+
+print(data.isnull().sum())
+
+plot1 = data.hist(figsize = (10,10))
+plt.show()
+
+data['Glucose'].fillna(data['Glucose'].mean(), inplace = True)
+data['BloodPressure'].fillna(data['BloodPressure'].mean(), inplace = True)
+data['SkinThickness'].fillna(data['SkinThickness'].median(), inplace = True)
+data['Insulin'].fillna(data['Insulin'].median(), inplace = True)
+data['BMI'].fillna(data['BMI'].median(), inplace = True)
+
+plot2 = data.hist(figsize = (10,10))
+plt.show()
 
 # Criando X and y par ao algorítmo de aprendizagem de máquina.\
 print(' - Criando X e y para o algoritmo de aprendizagem a partir do arquivo diabetes_dataset')
@@ -24,14 +39,14 @@ feature_cols = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness',
 X = data[feature_cols]
 y = data.Outcome
 
-# Ciando o modelo preditivo para a base trabalhada
+# Criando o modelo preditivo para a base trabalhada
 print(' - Criando modelo preditivo')
 neigh = KNeighborsClassifier(n_neighbors=3)
 neigh.fit(X, y)
 
 #realizando previsões com o arquivo de
 print(' - Aplicando modelo e enviando para o servidor')
-data_app = pd.read_csv('diabetes_app.csv')
+data_app = pd.read_csv('https://raw.githubusercontent.com/audreyemmely/mlclass/master/01_Preprocessing/diabetes_app.csv')
 data_app = data_app[feature_cols]
 y_pred = neigh.predict(data_app)
 
@@ -39,7 +54,7 @@ y_pred = neigh.predict(data_app)
 URL = "https://aydanomachado.com/mlclass/01_Preprocessing.php"
 
 #TODO Substituir pela sua chave aqui
-DEV_KEY = "shantayustay"
+DEV_KEY = "shantay u stay"
 
 # json para ser enviado para o servidor
 data = {'dev_key':DEV_KEY,
