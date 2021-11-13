@@ -17,17 +17,21 @@ import requests
 print('\n - Lendo o arquivo com o dataset sobre diabetes')
 data = pd.read_csv('https://raw.githubusercontent.com/audreyemmely/mlclass/master/01_Preprocessing/diabetes_dataset.csv')
 
+#mostrando valores faltantes no dataset
 print(data.isnull().sum())
 
+#plotando o histograma
 plot1 = data.hist(figsize = (10,10))
 plt.show()
 
+#substituindo os valores faltantes com média ou mediana
 data['Glucose'].fillna(data['Glucose'].mean(), inplace = True)
 data['BloodPressure'].fillna(data['BloodPressure'].mean(), inplace = True)
 data['SkinThickness'].fillna(data['SkinThickness'].median(), inplace = True)
 data['Insulin'].fillna(data['Insulin'].median(), inplace = True)
 data['BMI'].fillna(data['BMI'].median(), inplace = True)
 
+#plotando o histograma após a substituição
 plot2 = data.hist(figsize = (10,10))
 plt.show()
 
