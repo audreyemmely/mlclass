@@ -39,7 +39,7 @@ y_pred = neigh.predict(data_app)
 URL = "https://aydanomachado.com/mlclass/01_Preprocessing.php"
 
 #TODO Substituir pela sua chave aqui
-DEV_KEY = "COLOCAR_SUA_KEY_AQUI"
+DEV_KEY = "shantayustay"
 
 # json para ser enviado para o servidor
 data = {'dev_key':DEV_KEY,
