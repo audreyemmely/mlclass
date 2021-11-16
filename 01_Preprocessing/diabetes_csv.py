@@ -24,7 +24,7 @@ print(data.isnull().sum())
 plot1 = data.hist(figsize = (10,10))
 plt.show()
 
-#substituindo os valores faltantes com média ou mediana
+#substituindo os valores faltantes com média (em caso de distribuição normal) ou mediana (caso n seja normal)
 data['Glucose'].fillna(data['Glucose'].mean(), inplace = True)
 data['BloodPressure'].fillna(data['BloodPressure'].mean(), inplace = True)
 data['SkinThickness'].fillna(data['SkinThickness'].median(), inplace = True)
